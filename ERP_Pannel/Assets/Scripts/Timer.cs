@@ -22,7 +22,11 @@ public class Timer : MonoBehaviour
 
     public void GoText()
     {
-        text[n].text = timeText.text;
-        n++;
+        if (n != 10) {
+            text[n].text = timeText.text;
+            n++;
+        } else {
+            Time.timeScale = 0.0f;
+        }
     }
 }
