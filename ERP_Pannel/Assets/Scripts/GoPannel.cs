@@ -17,6 +17,8 @@ public class GoPannel : MonoBehaviour
     public Text currentTime;
     public Image numPanel;
     public Text[] num = new Text[4];
+    public Text testNumFive;
+    public Text testCharX;
     public RealTime realTime;
 
     public int[] ArrayIndex1;
@@ -37,20 +39,31 @@ public class GoPannel : MonoBehaviour
         ArrayIndex5 = new int[] {1, 4, 7};
         ArrayIndex6 = new int[] {2, 5, 8};
         ArrayIndex = new int[][] {ArrayIndex1, ArrayIndex2, ArrayIndex3, ArrayIndex4, ArrayIndex5, ArrayIndex6};
+        testNumFive.color = new Color(0.0f, 0.0f, 0.0f, 0.0f);
+        testCharX.color = new Color(0.0f, 0.0f, 0.0f, 0.0f);
+        realTime.peekTime = new string[50];
+        realTime.peekIdx = new int[50];
+        realTime.clickedTime = new string[50];
+
     }
 
     public void Update()
     {
-        if(Input.GetKeyDown(KeyCode.Space))
+        if(Input.GetKeyDown(KeyCode.Escape))
         {
-            currentTime.text = DateTime.Now.ToString(("yyyy-MM-dd HH:mm:ss tt"));
+            currentTime.text = DateTime.Now.ToString(("yyyy-MM-dd HH:mm:ss.fff tt"));
             coroutine = test();
             timer.isTimeCheck = true;
             StartCoroutine(coroutine);
+            GoToJson();
             realTime.realTime = currentTime.text;
-            string jsonData = JsonUtility.ToJson(realTime,true);
-            string path = Path.Combine(Application.dataPath,"timeData.json");
-            File.WriteAllText(path,jsonData);
+            // string jsonData = JsonUtility.ToJson(realTime,true);
+            // string path = Path.Combine(Application.dataPath,"timeData.json");
+            // File.WriteAllText(path,jsonData);
+        }
+        
+        if(Input.GetKeyDown(KeyCode.R)) {
+            Reset();
         }
     }
 
@@ -58,64 +71,74 @@ public class GoPannel : MonoBehaviour
     {
         while(true)
         {
-            if(n == 50)
+            if(n == 300)
             {
                 timer.isTimeCheck = false;
                 break;
             }
 
-            int k = SelectRandomNum(-1);
-            int j = SelectRandomNum(k);
-            int pos = -1;
-            
+            // int k = SelectRandomNum(-1);
 
-            foreach (int i in ArrayIndex[k]) {
-                // image[i].color = new Color(0.3f, 0.3f, 0.3f, 0.3f);
-                textSet[i].color = new Color(0.9f, 0.9f, 0.9f, 0.9f);
+            // foreach (int i in ArrayIndex[k]) {
+            //     // image[i].color = new Color(0.3f, 0.3f, 0.3f, 0.3f);
+            //     textSet[i].color = new Color(0.9f, 0.9f, 0.9f, 0.9f);
 
-                // if (pos != -1) {
-                //     image[pos].color = new Color(0.9f, 0.9f, 0.9f, 0.9f);
-                // }
-            }
-
-            foreach (int i in ArrayIndex[j]) {
-                // if (q == i) {
-                //     pos = i;
-                // }
-                // image[q].color = new Color(0.3f, 0.3f, 0.3f, 0.3f);
-                textSet[i].color = new Color(0.9f, 0.9f, 0.9f, 0.9f);
-            }            
-
-
-
-            yield return new WaitForSeconds(0.2f);
-
-            foreach (int i in ArrayIndex[k]) {
-                // image[i].color = new Color(0,0,0,0);
-                textSet[i].color = new Color(0.3f, 0.3f, 0.3f, 0.3f);
-            }
-
-            foreach (int i in ArrayIndex[j]) {
-                // image[i].color = new Color(0,0,0,0);
-                textSet[i].color = new Color(0.3f, 0.3f, 0.3f, 0.3f);
-            }
-
-            // if (pos != -1) {
-            //     image[pos].color = new Color(0,0,0,0);
+            //     // if (pos != -1) {
+            //     //     image[pos].color = new Color(0.9f, 0.9f, 0.9f, 0.9f);
+            //     // }
             // }
-                            
-             
 
-            // image[n % 9].color = new Color(0.3f, 0.3f, 0.3f, 0.3f);
-            // yield return new WaitForSeconds(0.2f);
-            // image[n % 9].color = new Color(0,0,0,0);
+            int testCase = UnityEngine.Random.Range(1,3);
+
+            switch (testCase) {
+                case 1:
+                    testNumFive.color = new Color(0.9f, 0.9f, 0.9f, 0.9f);
+                    break;
+
+                case 2:
+                    testCharX.color = new Color(0.9f, 0.9f, 0.9f, 0.9f);
+                    break;
+
+                default:
+                    break;
+            }
+
+            realTime.peekTime[n] = DateTime.Now.ToString(("yyyy-MM-dd HH:mm:ss.fff tt"));
+            realTime.peekIdx[n] = testCase;
+            GoToJson();
+
+            yield return new WaitForSeconds(0.4f);
+
+            // foreach (int i in ArrayIndex[k]) {
+            //     // image[i].color = new Color(0,0,0,0);
+            //     textSet[i].color = new Color(0.3f, 0.3f, 0.3f, 0.3f);
+            // }
+
+            switch (testCase) {
+                case 1:
+                    testNumFive.color = new Color(0.0f, 0.0f, 0.0f, 0.0f);
+                    break;
+
+                case 2:
+                    testCharX.color = new Color(0.0f, 0.0f, 0.0f, 0.0f);
+                    break;
+
+                default:
+                    break;
+            }
             n += 1; 
-            yield return new WaitForSeconds(f);
+
+            float randomTime = UnityEngine.Random.Range(1.0f, 1.25f);
+            yield return new WaitForSeconds(randomTime);
         }
     }
 
     public void Reset()
     {
+        realTime.peekTime = new string[50];
+        realTime.clickedTime = new string[50];
+        realTime.peekIdx = new int[50];
+        
         Time.timeScale = 1.0f;
         foreach(Image m in image)
         {
@@ -128,10 +151,10 @@ public class GoPannel : MonoBehaviour
         timer.timeText.text = "0";
         timer.isTimeCheck = false;
         StopCoroutine(coroutine);
-        for(int i = 0; i < 10; i++)
-        {
-            timer.text[i].text = "-";
-        }
+        // for(int i = 0; i < 10; i++)
+        // {
+        //     timer.text[i].text = "-";
+        // }
     }
 
     public void Exit()
@@ -167,9 +190,18 @@ public class GoPannel : MonoBehaviour
         return num;
     }
 
+    public void GoToJson() {
+        string jsonData = JsonUtility.ToJson(realTime,true);
+        string path = Path.Combine(Application.dataPath,"timeData.json");
+        File.WriteAllText(path,jsonData);
+    }
+
     [System.Serializable]
     public class RealTime
     {
         public string realTime;
+        public string[] peekTime;
+        public int[] peekIdx;
+        public string[] clickedTime;
     }
 }
