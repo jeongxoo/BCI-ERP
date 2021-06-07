@@ -38,23 +38,23 @@ ScriptsOnlyBuild:
     - Class: 108
       Script: {instanceID: 0}
     - Class: 114
-      Script: {instanceID: 1494}
+      Script: {instanceID: 1486}
     - Class: 114
-      Script: {instanceID: 2208}
+      Script: {instanceID: 2198}
     - Class: 114
-      Script: {instanceID: 2318}
+      Script: {instanceID: 2308}
     - Class: 114
-      Script: {instanceID: 2624}
+      Script: {instanceID: 2610}
     - Class: 114
-      Script: {instanceID: 2802}
+      Script: {instanceID: 2788}
     - Class: 114
-      Script: {instanceID: 2944}
+      Script: {instanceID: 2814}
     - Class: 114
-      Script: {instanceID: 3026}
+      Script: {instanceID: 3012}
     - Class: 114
-      Script: {instanceID: 3336}
+      Script: {instanceID: 3322}
     - Class: 114
-      Script: {instanceID: 3468}
+      Script: {instanceID: 3454}
     - Class: 115
       Script: {instanceID: 0}
     - Class: 128
@@ -266,7 +266,7 @@ ScriptsOnlyBuild:
     className: PlaymodeTestsController
   - hash:
       serializedVersion: 2
-      Hash: a0607a177c0b0986fd0ce48b02e79f0c
+      Hash: 5a51b6176c5629f4241d325cabf0fb81
     assemblyName: Assembly-CSharp.dll
     namespaceName: 
     className: Timer
@@ -368,6 +368,12 @@ ScriptsOnlyBuild:
     className: TimelineAsset
   - hash:
       serializedVersion: 2
+      Hash: 0425478cc9781be2eb8a272589d864f0
+    assemblyName: Assembly-CSharp.dll
+    namespaceName: 
+    className: GoPannel
+  - hash:
+      serializedVersion: 2
       Hash: 760787567e1b60d64a3e421ab83ee14a
     assemblyName: Unity.TextMeshPro.dll
     namespaceName: TMPro
@@ -378,12 +384,6 @@ ScriptsOnlyBuild:
     assemblyName: Unity.TextMeshPro.dll
     namespaceName: TMPro
     className: TMP_SubMeshUI
-  - hash:
-      serializedVersion: 2
-      Hash: 56c0818b71da0deadf087789ace1255b
-    assemblyName: Assembly-CSharp.dll
-    namespaceName: 
-    className: GoPannel
   - hash:
       serializedVersion: 2
       Hash: 5cc439bf63c0539d39588e69465ac2ab
@@ -507,4 +507,4 @@ ScriptsOnlyBuild:
   platform: 19
   scenePathNames:
   - Assets/Scenes/New Scene.unity
-  playerPath: "/Users/jeongxoo/Desktop/\uC2E0\uACBD\uACF5\uD559/ERP4_300/ERP_Num4.exe"
+  playerPath: "/Users/jeongxoo/Desktop/\uC2E0\uACBD\uACF5\uD559/newnewenw/ERP_Num4_Only_PeekTime.exe"

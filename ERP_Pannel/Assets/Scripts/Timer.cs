@@ -8,7 +8,7 @@ using System.IO;
 
 public class Timer : MonoBehaviour
 {
-    public GoPannel goPannel;
+    // public GoPannel goPannel;
     public Text timeText;
     public float time;
     public Text[] text = new Text[50];
@@ -33,8 +33,8 @@ public class Timer : MonoBehaviour
     {
         if (n != 50) {
             text[0].text = n.ToString();
-            goPannel.realTime.clickedTime[n] = DateTime.Now.ToString(("yyyy-MM-dd HH:mm:ss.fff tt"));
-            goPannel.GoToJson();
+            // goPannel.realTime.clickedTime[n] = DateTime.Now.ToString(("yyyy-MM-dd HH:mm:ss.fff tt"));
+            // goPannel.GoToJson();
             n++;
         } else {
             Time.timeScale = 0.0f;

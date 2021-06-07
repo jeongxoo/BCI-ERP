@@ -3,11 +3,18 @@ using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+// #if UNITY_EDITOR
+// using UnityEditor;
+// #endif
 using UnityEngine.UI;
 using System.IO;
 
 public class GoPannel : MonoBehaviour
 {
+
+    // public Canvas testPannel;
+    // public Canvas realPannel;
+    public GameObject ad;
     public Image[] image = new Image[9];
     public Text[] textSet = new Text[9];
     public int n = 0;
@@ -21,6 +28,8 @@ public class GoPannel : MonoBehaviour
     public Text testCharX;
     public RealTime realTime;
 
+    public int cnt;
+    public int testCase;
     public int[] ArrayIndex1;
     public int[] ArrayIndex2;
     public int[] ArrayIndex3;
@@ -42,8 +51,8 @@ public class GoPannel : MonoBehaviour
         testNumFive.color = new Color(0.0f, 0.0f, 0.0f, 0.0f);
         testCharX.color = new Color(0.0f, 0.0f, 0.0f, 0.0f);
         realTime.peekTime = new string[50];
-        realTime.peekIdx = new int[50];
-        realTime.clickedTime = new string[50];
+        // realTime.peekIdx = new int[50];
+        // realTime.clickedTime = new string[50];
 
     }
 
@@ -88,11 +97,21 @@ public class GoPannel : MonoBehaviour
             //     // }
             // }
 
-            int testCase = UnityEngine.Random.Range(1,3);
+            if (n == 1) {
+                testCase = 2;
+            } else {
+                testCase = UnityEngine.Random.Range(1,3);
+            }
+            
 
             switch (testCase) {
                 case 1:
                     testNumFive.color = new Color(0.9f, 0.9f, 0.9f, 0.9f);
+                    realTime.peekTime[cnt] = DateTime.Now.ToString(("yyyy-MM-dd HH:mm:ss.fff tt"));
+                    cnt++;
+                    // #if UNITY_EDITOR
+                    //     UnityEditor.ArrayUtility.Add(ref realTime.peekTime, DateTime.Now.ToString(("yyyy-MM-dd HH:mm:ss.fff tt")));
+                    // #endif
                     break;
 
                 case 2:
@@ -103,8 +122,8 @@ public class GoPannel : MonoBehaviour
                     break;
             }
 
-            realTime.peekTime[n] = DateTime.Now.ToString(("yyyy-MM-dd HH:mm:ss.fff tt"));
-            realTime.peekIdx[n] = testCase;
+            // realTime.peekTime[n] = DateTime.Now.ToString(("yyyy-MM-dd HH:mm:ss.fff tt"));
+            // realTime.peekIdx[n] = testCase;
             GoToJson();
 
             yield return new WaitForSeconds(0.4f);
@@ -128,17 +147,21 @@ public class GoPannel : MonoBehaviour
             }
             n += 1; 
 
-            float randomTime = UnityEngine.Random.Range(1.0f, 1.25f);
-            yield return new WaitForSeconds(randomTime);
+            // float randomTime = UnityEngine.Random.Range(1.0f, 1.25f);
+            yield return new WaitForSeconds(1.5f);
         }
     }
 
     public void Reset()
     {
-        realTime.peekTime = new string[50];
-        realTime.clickedTime = new string[50];
-        realTime.peekIdx = new int[50];
+        // realTime.peekTime = new string[];
+        // realTime.clickedTime = new string[50];
+        // realTime.peekIdx = new int[50];
         
+        //  #if UNITY_EDITOR
+        //     UnityEditor.ArrayUtility.Clear(ref realTime.peekTime);
+        // #endif
+        realTime.peekTime = new string[50];
         Time.timeScale = 1.0f;
         foreach(Image m in image)
         {
@@ -146,6 +169,7 @@ public class GoPannel : MonoBehaviour
         }
         currentTime.text = "-";
         n = 0;
+        cnt = 0;
         timer.n = 0;
         timer.time = 0;
         timer.timeText.text = "0";
@@ -201,7 +225,7 @@ public class GoPannel : MonoBehaviour
     {
         public string realTime;
         public string[] peekTime;
-        public int[] peekIdx;
-        public string[] clickedTime;
+        // public int[] peekIdx;
+        // public string[] clickedTime;
     }
 }
